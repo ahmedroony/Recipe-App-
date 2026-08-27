@@ -1,3 +1,32 @@
 <resources>
+    <!-- Existing strings (unchanged) -->
     <string name="app_name">Recipe App</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!-- Task 4 strings -->
+    <string name="recipe_image_desc">Recipe image</string>
+    <string name="back">Back</string>
+    <string name="play_video">Play video</string>
+    <string name="instructions_label">Instructions</string>
+    <string name="show_full_recipe">Show Full Recipe</string>
+    <string name="collapse_recipe">Collapse</string>
+    <string name="added_to_favorites">Added to favorites</string>
+    <string name="removed_from_favorites">Removed from favorites</string>
+    <string name="no_video_available">No video available for this recipe</string>
+    <string name="no_favorites">No favorites yet\nTap the heart on any recipe to save it here.</string>
+    <string name="delete_favorite">Delete recipe</string>
+    <string name="close_video">Close video</string>
+    <string name="menu_about">About Creator</string>
+    <string name="menu_signout">Sign Out</string>
+    <string name="about_app_name">Recipe App</string>
+    <string name="about_description">Discover and save delicious recipes from around the world, powered by TheMealDB.</string>
+    <string name="about_creator_title">About the Creator</string>
+    <string name="about_creator_name">Your Name Here</string>
+    <string name="about_creator_detail">Computer Science Student\nGraduation Project 2026</string>
+    <string name="about_version">Version 1.0</string>
+    <string name="home">Home</string>
+    <string name="search">Search</string>
+    <string name="favorites">Favorites</string>
+    <string name="recipe_detail_label">Recipe Detail</string>
+    <string name="about_label">About</string>
 </resources>

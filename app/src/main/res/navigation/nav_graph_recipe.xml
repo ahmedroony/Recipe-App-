@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph_recipe"
+    app:startDestination="@id/homeFragment">
+
+    <!--
+        PERSON 3: Host this graph in RecipeActivity (or MainActivity) layout:
+          <androidx.fragment.app.FragmentContainerView
+              android:id="@+id/navHostFragmentRecipe"
+              android:name="androidx.navigation.fragment.NavHostFragment"
+              app:navGraph="@navigation/nav_graph_recipe"
+              app:defaultNavHost="true"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"/>
+
+        When a recipe is clicked in HomeFragment or SearchFragment, navigate with:
+          val args = Bundle().apply { putString("idMeal", recipe.idMeal) }
+          findNavController().navigate(R.id.action_home_to_recipeDetail, args)
+    -->
+
+    <!-- Person 3 owns HomeFragment -->
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.example.recipeapp.Fragments.HomeFragment"
+        android:label="@string/home"
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/action_home_to_recipeDetail"
+            app:destination="@id/recipeDetailFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+    </fragment>
+
+    <!-- Person 3 owns SearchFragment -->
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="com.example.recipeapp.Fragments.SearchFragment"
+        android:label="@string/search"
+        tools:layout="@layout/fragment_search">
+        <action
+            android:id="@+id/action_search_to_recipeDetail"
+            app:destination="@id/recipeDetailFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+    </fragment>
+
+    <!-- Task 4 owns the following three fragments -->
+    <fragment
+        android:id="@+id/favoriteFragment"
+        android:name="com.example.recipeapp.Fragments.FavoriteFragment"
+        android:label="@string/favorites"
+        tools:layout="@layout/fragment_favorite">
+        <action
+            android:id="@+id/action_favorite_to_recipeDetail"
+            app:destination="@id/recipeDetailFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/recipeDetailFragment"
+        android:name="com.example.recipeapp.Fragments.RecipeDetailFragment"
+        android:label="@string/recipe_detail_label"
+        tools:layout="@layout/fragment_recipe_detail">
+        <argument
+            android:name="idMeal"
+            app:argType="string"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/aboutFragment"
+        android:name="com.example.recipeapp.Fragments.AboutFragment"
+        android:label="@string/about_label"
+        tools:layout="@layout/fragment_about"/>
+
+</navigation>

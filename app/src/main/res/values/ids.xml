@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--
+        Declares the NavHostFragment ID used by MenuHandler.kt.
+        PERSON 3: Your FragmentContainerView must use:
+            android:id="@+id/navHostFragmentRecipe"
+    -->
+    <item name="navHostFragmentRecipe" type="id"/>
+</resources>
