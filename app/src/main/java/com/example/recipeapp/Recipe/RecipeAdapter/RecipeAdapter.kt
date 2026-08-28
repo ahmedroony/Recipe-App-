@@ -8,9 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.recipeapp.R
 import com.example.recipeapp.Recipe.Recipe
 
-class RecipeAdapter(
-    private var recipeList: List<Recipe>
-    ,private val onItemClick: (Recipe) -> Unit)
+class RecipeAdapter(private var recipeList: List<Recipe>,private val onItemClick: (Recipe) -> Unit)
     : RecyclerView.Adapter<RecipeAdapter.RecipeViewHolder>() {
     class RecipeViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
     val tvTitle: TextView = itemView.findViewById(R.id.textView)
