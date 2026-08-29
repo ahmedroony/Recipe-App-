@@ -1,0 +1,274 @@
+Index: .artifacts/dd151037-a792-4290-bbb3-00a66683af4a/task.artifact.md
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.artifacts/dd151037-a792-4290-bbb3-00a66683af4a/task.artifact.md b/.artifacts/dd151037-a792-4290-bbb3-00a66683af4a/task.artifact.md
+new file mode 100644
+--- /dev/null	(date 1787985162609)
++++ b/.artifacts/dd151037-a792-4290-bbb3-00a66683af4a/task.artifact.md	(date 1787985162609)
+@@ -0,0 +1,3 @@
++- `[x]` Add Retrofit and Gson converter to `libs.versions.toml`
++- `[x]` Add dependencies to `app/build.gradle.kts`
++- `[x]` Verify build by running `./gradlew :app:compileDebugKotlin`
+Index: build.gradle.kts
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>// Top-level build file where you can add configuration options common to all sub-projects/modules.\r\nplugins {\r\n    alias(libs.plugins.android.application) apply false\r\n    alias(libs.plugins.kotlin.compose) apply false\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/build.gradle.kts b/build.gradle.kts
+--- a/build.gradle.kts	(revision 4d9c9505e51f41ed9364a1477ce2c25516b47e06)
++++ b/build.gradle.kts	(date 1787984991019)
+@@ -2,4 +2,6 @@
+ plugins {
+     alias(libs.plugins.android.application) apply false
+     alias(libs.plugins.kotlin.compose) apply false
++    alias(libs.plugins.kotlin.parcelize) apply false
++    alias(libs.plugins.ksp) apply false
+ }
+\ No newline at end of file
+Index: .idea/planningMode.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/planningMode.xml b/.idea/planningMode.xml
+new file mode 100644
+--- /dev/null	(date 1787984491806)
++++ b/.idea/planningMode.xml	(date 1787984491806)
+@@ -0,0 +1,13 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="PlanningModeManager">
++    <option name="approvalStates">
++      <map>
++        <entry key="11c3921c-3fb0-4047-a3f0-91b14a95d851" value="false" />
++        <entry key="42896f3b-bd98-4691-95df-558267a7f774" value="false" />
++        <entry key="4b1d7e42-a900-4358-8d71-9aa7c4d45e85" value="false" />
++        <entry key="d627aed6-33d7-4d35-8f84-adafd22ef626" value="false" />
++      </map>
++    </option>
++  </component>
++</project>
+\ No newline at end of file
+Index: .artifacts/dd151037-a792-4290-bbb3-00a66683af4a/implementation_plan.artifact.md
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.artifacts/dd151037-a792-4290-bbb3-00a66683af4a/implementation_plan.artifact.md b/.artifacts/dd151037-a792-4290-bbb3-00a66683af4a/implementation_plan.artifact.md
+new file mode 100644
+--- /dev/null	(date 1787985050484)
++++ b/.artifacts/dd151037-a792-4290-bbb3-00a66683af4a/implementation_plan.artifact.md	(date 1787985050484)
+@@ -0,0 +1,22 @@
++# Fix "Unresolved reference 'retrofit2'"
++
++The project is missing the Retrofit dependency, which is required by `ApiService.kt`. This plan adds Retrofit and the Gson converter to the project's dependencies.
++
++## Proposed Changes
++
++### Build Configuration
++
++#### [MODIFY] [libs.versions.toml](file:///S:/MyWork/Android_Projects/Recipe-App-/gradle/libs.versions.toml)
++- Add Retrofit and Gson converter versions.
++- Add Retrofit and Gson converter library definitions.
++
++#### [MODIFY] [build.gradle.kts (app)](file:///S:/MyWork/Android_Projects/Recipe-App-/app/build.gradle.kts)
++- Add Retrofit and Gson converter to the `dependencies` block.
++
++## Verification Plan
++
++### Automated Tests
++- Run `./gradlew :app:compileDebugKotlin` to verify that the unresolved reference error is resolved.
++
++### Manual Verification
++- Perform a Gradle Sync in Android Studio to ensure the IDE recognizes the new dependencies.
+Index: gradle.properties
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+># Project-wide Gradle settings.\r\n# IDE (e.g. Android Studio) users:\r\n# Gradle settings configured through the IDE *will override*\r\n# any settings specified in this file.\r\n# For more details on how to configure your build environment visit\r\n# http://www.gradle.org/docs/current/userguide/build_environment.html\r\n# Specifies the JVM arguments used for the daemon process.\r\n# The setting is particularly useful for tweaking memory settings.\r\norg.gradle.jvmargs=-Xmx2048m -Dfile.encoding=UTF-8\r\n# When configured, Gradle will run in incubating parallel mode.\r\n# This option should only be used with decoupled projects. For more details, visit\r\n# https://developer.android.com/r/tools/gradle-multi-project-decoupled-projects\r\n# org.gradle.parallel=true\r\n# When enabled, the Configuration Cache allows Gradle to skip the configuration\r\n# phase entirely if nothing that affects the build configuration (such as build scripts)\r\n# has changed. Additionally, Gradle applies performance optimizations to task execution.\r\norg.gradle.configuration-cache=true\r\n# Kotlin code style for this project: \"official\" or \"obsolete\":\r\nkotlin.code.style=official
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/gradle.properties b/gradle.properties
+--- a/gradle.properties	(revision 4d9c9505e51f41ed9364a1477ce2c25516b47e06)
++++ b/gradle.properties	(date 1787984991028)
+@@ -16,4 +16,5 @@
+ # has changed. Additionally, Gradle applies performance optimizations to task execution.
+ org.gradle.configuration-cache=true
+ # Kotlin code style for this project: "official" or "obsolete":
+-kotlin.code.style=official
+\ No newline at end of file
++kotlin.code.style=official
++android.disallowKotlinSourceSets=false
+Index: app/build.gradle.kts
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>plugins {\r\n    alias(libs.plugins.android.application)\r\n    alias(libs.plugins.kotlin.compose)\r\n}\r\n\r\nandroid {\r\n    namespace = \"com.example.recipeapp\"\r\n    compileSdk {\r\n        version = release(37)\r\n    }\r\n\r\n    defaultConfig {\r\n        applicationId = \"com.example.recipeapp\"\r\n        minSdk = 24\r\n        targetSdk = 36\r\n        versionCode = 1\r\n        versionName = \"1.0\"\r\n\r\n        testInstrumentationRunner = \"androidx.test.runner.AndroidJUnitRunner\"\r\n    }\r\n\r\n    buildTypes {\r\n        release {\r\n            optimization {\r\n                enable = false\r\n            }\r\n        }\r\n    }\r\n    compileOptions {\r\n        sourceCompatibility = JavaVersion.VERSION_11\r\n        targetCompatibility = JavaVersion.VERSION_11\r\n    }\r\n    buildFeatures {\r\n        compose = true\r\n    }\r\n}\r\n\r\ndependencies {\r\n    implementation(platform(libs.androidx.compose.bom))\r\n    implementation(libs.androidx.activity.compose)\r\n    implementation(libs.androidx.compose.material3)\r\n    implementation(libs.androidx.compose.ui)\r\n    implementation(libs.androidx.compose.ui.graphics)\r\n    implementation(libs.androidx.compose.ui.tooling.preview)\r\n    implementation(libs.androidx.core.ktx)\r\n    implementation(libs.androidx.lifecycle.runtime.ktx)\r\n    implementation(libs.recyclerview)\r\n    testImplementation(libs.junit)\r\n    androidTestImplementation(platform(libs.androidx.compose.bom))\r\n    androidTestImplementation(libs.androidx.compose.ui.test.junit4)\r\n    androidTestImplementation(libs.androidx.espresso.core)\r\n    androidTestImplementation(libs.androidx.junit)\r\n    debugImplementation(libs.androidx.compose.ui.test.manifest)\r\n    debugImplementation(libs.androidx.compose.ui.tooling)\r\n    val fragment_version = \"1.9.0\"\r\n    implementation(\"androidx.fragment:fragment-ktx:${fragment_version}\")\r\n    implementation(\"com.google.android.material:material:1.11.0\")\r\n    implementation(\"com.airbnb.android:lottie:6.4.0\")\r\n    implementation(\"org.jetbrains.kotlinx:kotlinx-coroutines-core:1.8.0\")\r\n    implementation(\"androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.0\")\r\n    implementation(\"androidx.lifecycle:lifecycle-runtime-ktx:2.8.0\")\r\n    implementation(\"com.squareup.retrofit2:retrofit:2.9.0\")\r\n    implementation(\"com.squareup.retrofit2:converter-gson:2.9.0\")\r\n\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/build.gradle.kts b/app/build.gradle.kts
+--- a/app/build.gradle.kts	(revision 4d9c9505e51f41ed9364a1477ce2c25516b47e06)
++++ b/app/build.gradle.kts	(date 1787985075193)
+@@ -1,6 +1,8 @@
+ plugins {
+     alias(libs.plugins.android.application)
+     alias(libs.plugins.kotlin.compose)
++    alias(libs.plugins.ksp)
++    alias(libs.plugins.kotlin.parcelize)
+ }
+ 
+ android {
+@@ -15,27 +17,27 @@
+         targetSdk = 36
+         versionCode = 1
+         versionName = "1.0"
+-
+         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+     }
+ 
+     buildTypes {
+         release {
+-            optimization {
+-                enable = false
+-            }
++            optimization { enable = false }
+         }
+     }
+     compileOptions {
+         sourceCompatibility = JavaVersion.VERSION_11
+         targetCompatibility = JavaVersion.VERSION_11
+     }
++    // kotlinOptions removed as part of AGP 9.0 built-in Kotlin migration
+     buildFeatures {
+         compose = true
++        viewBinding = true               // required for all fragment ViewBindings
+     }
+ }
+ 
+ dependencies {
++    // ── Existing team dependencies (unchanged) ────────────────────────────
+     implementation(platform(libs.androidx.compose.bom))
+     implementation(libs.androidx.activity.compose)
+     implementation(libs.androidx.compose.material3)
+@@ -59,7 +61,24 @@
+     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.8.0")
+     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.0")
+     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.8.0")
+-    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+-    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+ 
+-}
+\ No newline at end of file
++    // ── Task 4 additions ──────────────────────────────────────────────────
++    // Navigation Component (nav graph + findNavController)
++    implementation("androidx.navigation:navigation-fragment-ktx:2.9.0")
++    implementation("androidx.navigation:navigation-ui-ktx:2.9.0")
++    // Room (DAO contract; Person 1 provides @Database)
++    implementation("androidx.room:room-runtime:2.7.1")
++    implementation("androidx.room:room-ktx:2.7.1")
++    ksp("androidx.room:room-compiler:2.7.1")
++    // LiveData coroutine extensions
++    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.8.0")
++    // ConstraintLayout for detail / favorite / overlay layouts
++    implementation("androidx.constraintlayout:constraintlayout:2.2.1")
++    // Glide — image loading for recipe thumbnails
++    implementation("com.github.bumptech.glide:glide:4.16.0")
++    // YouTube player overlay
++    implementation(libs.youtube.player)
++    // Retrofit
++    implementation(libs.retrofit)
++    implementation(libs.retrofit.converter.gson)
++}
+Index: .idea/deploymentTargetSelector.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"deploymentTargetSelector\">\r\n    <selectionStates>\r\n      <SelectionState runConfigName=\"app\">\r\n        <option name=\"selectionMode\" value=\"DROPDOWN\" />\r\n        <DialogSelection />\r\n      </SelectionState>\r\n    </selectionStates>\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/deploymentTargetSelector.xml b/.idea/deploymentTargetSelector.xml
+--- a/.idea/deploymentTargetSelector.xml	(revision 4d9c9505e51f41ed9364a1477ce2c25516b47e06)
++++ b/.idea/deploymentTargetSelector.xml	(date 1787985016124)
+@@ -4,6 +4,13 @@
+     <selectionStates>
+       <SelectionState runConfigName="app">
+         <option name="selectionMode" value="DROPDOWN" />
++        <DropdownSelection timestamp="2026-08-29T06:15:36.028759500Z">
++          <Target type="DEFAULT_BOOT">
++            <handle>
++              <DeviceId pluginId="LocalEmulator" identifier="path=C:\Users\ABDO\.android\avd\Medium_Phone.avd" />
++            </handle>
++          </Target>
++        </DropdownSelection>
+         <DialogSelection />
+       </SelectionState>
+     </selectionStates>
+Index: gradle/libs.versions.toml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>[versions]\r\nagp = \"9.3.1\"\r\ncoreKtx = \"1.19.0\"\r\njunit = \"4.13.2\"\r\njunitVersion = \"1.3.0\"\r\nespressoCore = \"3.7.0\"\r\nlifecycleRuntimeKtx = \"2.11.0\"\r\nactivityCompose = \"1.13.0\"\r\nkotlin = \"2.2.10\"\r\ncomposeBom = \"2026.02.01\"\r\nappcompat = \"1.7.0\"\r\nfragment = \"1.8.2\"\r\nrecyclerview = \"1.3.2\"\r\nmaterial = \"1.12.0\"\r\nrecyclerviewVersion = \"1.4.0\"\r\n\r\n[libraries]\r\nandroidx-core-ktx = { group = \"androidx.core\", name = \"core-ktx\", version.ref = \"coreKtx\" }\r\njunit = { group = \"junit\", name = \"junit\", version.ref = \"junit\" }\r\nandroidx-junit = { group = \"androidx.test.ext\", name = \"junit\", version.ref = \"junitVersion\" }\r\nandroidx-espresso-core = { group = \"androidx.test.espresso\", name = \"espresso-core\", version.ref = \"espressoCore\" }\r\nandroidx-lifecycle-runtime-ktx = { group = \"androidx.lifecycle\", name = \"lifecycle-runtime-ktx\", version.ref = \"lifecycleRuntimeKtx\" }\r\nandroidx-activity-compose = { group = \"androidx.activity\", name = \"activity-compose\", version.ref = \"activityCompose\" }\r\nandroidx-compose-bom = { group = \"androidx.compose\", name = \"compose-bom\", version.ref = \"composeBom\" }\r\nandroidx-compose-ui = { group = \"androidx.compose.ui\", name = \"ui\" }\r\nandroidx-compose-ui-graphics = { group = \"androidx.compose.ui\", name = \"ui-graphics\" }\r\nandroidx-compose-ui-tooling = { group = \"androidx.compose.ui\", name = \"ui-tooling\" }\r\nandroidx-compose-ui-tooling-preview = { group = \"androidx.compose.ui\", name = \"ui-tooling-preview\" }\r\nandroidx-compose-ui-test-manifest = { group = \"androidx.compose.ui\", name = \"ui-test-manifest\" }\r\nandroidx-compose-ui-test-junit4 = { group = \"androidx.compose.ui\", name = \"ui-test-junit4\" }\r\nandroidx-compose-material3 = { group = \"androidx.compose.material3\", name = \"material3\" }\r\nandroidx-appcompat = { group = \"androidx.appcompat\", name = \"appcompat\", version.ref = \"appcompat\" }\r\nandroidx-fragment-ktx = { group = \"androidx.fragment\", name = \"fragment-ktx\", version.ref = \"fragment\" }\r\nandroidx-recyclerview = { group = \"androidx.recyclerview\", name = \"recyclerview\", version.ref = \"recyclerview\" }\r\ngoogle-material = { group = \"com.google.android.material\", name = \"material\", version.ref = \"material\" }\r\nrecyclerview = { group = \"androidx.recyclerview\", name = \"recyclerview\", version.ref = \"recyclerviewVersion\" }\r\n\r\n[plugins]\r\nandroid-application = { id = \"com.android.application\", version.ref = \"agp\" }\r\nkotlin-compose = { id = \"org.jetbrains.kotlin.plugin.compose\", version.ref = \"kotlin\" }\r\n\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/gradle/libs.versions.toml b/gradle/libs.versions.toml
+--- a/gradle/libs.versions.toml	(revision 4d9c9505e51f41ed9364a1477ce2c25516b47e06)
++++ b/gradle/libs.versions.toml	(date 1787985067931)
+@@ -13,6 +13,8 @@
+ recyclerview = "1.3.2"
+ material = "1.12.0"
+ recyclerviewVersion = "1.4.0"
++youtube-player = "12.1.0"
++retrofit = "3.0.0"
+ 
+ [libraries]
+ androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
+@@ -34,8 +36,13 @@
+ androidx-recyclerview = { group = "androidx.recyclerview", name = "recyclerview", version.ref = "recyclerview" }
+ google-material = { group = "com.google.android.material", name = "material", version.ref = "material" }
+ recyclerview = { group = "androidx.recyclerview", name = "recyclerview", version.ref = "recyclerviewVersion" }
++youtube-player = { group = "com.pierfrancescosoffritti.androidyoutubeplayer", name = "core", version.ref = "youtube-player" }
++retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit" }
++retrofit-converter-gson = { group = "com.squareup.retrofit2", name = "converter-gson", version.ref = "retrofit" }
+ 
+ [plugins]
+ android-application = { id = "com.android.application", version.ref = "agp" }
+ kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
++kotlin-parcelize = { id = "org.jetbrains.kotlin.plugin.parcelize", version.ref = "kotlin" }
++ksp = { id = "com.google.devtools.ksp", version = "2.2.10-2.0.2" }
+ 
+Index: settings.gradle.kts
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>pluginManagement {\r\n    repositories {\r\n        google {\r\n            content {\r\n                includeGroupByRegex(\"com\\\\.android.*\")\r\n                includeGroupByRegex(\"com\\\\.google.*\")\r\n                includeGroupByRegex(\"androidx.*\")\r\n            }\r\n        }\r\n        mavenCentral()\r\n        gradlePluginPortal()\r\n    }\r\n}\r\nplugins {\r\n    id(\"org.gradle.toolchains.foojay-resolver-convention\") version \"1.0.0\"\r\n}\r\ndependencyResolutionManagement {\r\n    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)\r\n    repositories {\r\n        google()\r\n        mavenCentral()\r\n    }\r\n}\r\n\r\nrootProject.name = \"Recipe App\"\r\ninclude(\":app\")\r\n 
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/settings.gradle.kts b/settings.gradle.kts
+--- a/settings.gradle.kts	(revision 4d9c9505e51f41ed9364a1477ce2c25516b47e06)
++++ b/settings.gradle.kts	(date 1787985016141)
+@@ -1,12 +1,6 @@
+ pluginManagement {
+     repositories {
+-        google {
+-            content {
+-                includeGroupByRegex("com\\.android.*")
+-                includeGroupByRegex("com\\.google.*")
+-                includeGroupByRegex("androidx.*")
+-            }
+-        }
++        google()
+         mavenCentral()
+         gradlePluginPortal()
+     }
+@@ -19,6 +13,7 @@
+     repositories {
+         google()
+         mavenCentral()
++        maven { url = uri("https://jitpack.io") }
+     }
+ }
+ 
