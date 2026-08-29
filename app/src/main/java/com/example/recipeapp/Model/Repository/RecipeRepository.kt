@@ -1,8 +1,8 @@
-package com.example.recipeapp.repository
+package com.example.recipeapp.Model.Repository
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.example.recipeapp.model.Recipe
+import com.example.recipeapp.Model.Recipe
 
 /**
  * Singleton repository — currently in-memory/mock.

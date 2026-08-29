@@ -2,8 +2,8 @@ package com.example.recipeapp.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.recipeapp.model.Recipe
-import com.example.recipeapp.repository.RecipeRepository
+import com.example.recipeapp.Model.Recipe
+import com.example.recipeapp.Model.Repository.RecipeRepository
 import kotlinx.coroutines.launch
 
 class FavoriteViewModel : ViewModel() {

@@ -1,6 +1,4 @@
-package com.example.recipeapp.model
-
-import androidx.room.Entity
+package com.example.recipeapp.Model
 
 
 data class Recipe(

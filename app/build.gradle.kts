@@ -1,9 +1,8 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.compose)
-    // Task 4 additions
-    id("com.google.devtools.ksp") version "2.2.10-1.0.29"
-    id("org.jetbrains.kotlin.plugin.parcelize") version "2.2.10"
+    alias(libs.plugins.ksp)
+    alias(libs.plugins.kotlin.parcelize)
 }
 
 android {
@@ -30,7 +29,7 @@ android {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
     }
-    kotlinOptions { jvmTarget = "11" }   // required for Room KSP
+    // kotlinOptions removed as part of AGP 9.0 built-in Kotlin migration
     buildFeatures {
         compose = true
         viewBinding = true               // required for all fragment ViewBindings
@@ -78,5 +77,8 @@ dependencies {
     // Glide — image loading for recipe thumbnails
     implementation("com.github.bumptech.glide:glide:4.16.0")
     // YouTube player overlay
-    implementation("com.pierfrancescosolfritti.androidyoutubeplayer:core:12.1.0")
+    implementation(libs.youtube.player)
+    // Retrofit
+    implementation(libs.retrofit)
+    implementation(libs.retrofit.converter.gson)
 }
