@@ -45,6 +45,9 @@ class RecipeDetailFragment : Fragment() {
         ViewModelProvider(this, factory)[RecipeDetailViewModel::class.java]
     }
 
+    // the actual code
+
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

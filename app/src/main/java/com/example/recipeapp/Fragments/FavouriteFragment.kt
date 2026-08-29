@@ -45,6 +45,8 @@ class FavouriteFragment : Fragment() {
         ViewModelProvider(this, factory)[FavoriteViewModel::class.java]
     }
 
+    // the actual code of the fragment
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
