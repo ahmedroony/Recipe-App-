@@ -1,0 +1,3 @@
+- `[x]` Add Retrofit and Gson converter to `libs.versions.toml`
+- `[x]` Add dependencies to `app/build.gradle.kts`
+- `[x]` Verify build by running `./gradlew :app:compileDebugKotlin`

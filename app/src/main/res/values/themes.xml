@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources xmlns:tools="http://schemas.android.com/tools">
-    <style name="Theme.RecipeApp" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
-        <item name="colorPrimary">@color/purple_500</item>
+<resources>
+    <!--
+        SHARED FILE — Task 4 updated parent from android:Theme.Material.Light.NoActionBar
+        to Theme.MaterialComponents.DayNight.NoActionBar.
+        Required for: FloatingActionButton, MaterialCardView, MaterialButton.
+        material:1.11.0 (already in build.gradle.kts) provides this theme.
+    -->
+    <style name="Theme.RecipeApp" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/primaryColor</item>
+        <item name="colorPrimaryVariant">@color/primaryDark</item>
+        <item name="colorSecondary">@color/accent</item>
+        <item name="android:colorBackground">@color/screenBackground</item>
     </style>
 </resources>

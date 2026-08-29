@@ -1,18 +1,75 @@
 package com.example.recipeapp.Fragments
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.ItemTouchHelper
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.recipeapp.R
+import com.example.recipeapp.adapter.FavoriteAdapter
+import com.example.recipeapp.databinding.FragmentFavoriteBinding
+import com.example.recipeapp.viewmodel.FavoriteViewModel
+
 class FavoriteFragment : Fragment() {
+
+    private var _binding: FragmentFavoriteBinding? = null
+    private val binding get() = _binding!!
+    private val viewModel: FavoriteViewModel by viewModels()
+    private lateinit var adapter: FavoriteAdapter
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_favorite, container, false)
+    ): View {
+        _binding = FragmentFavoriteBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        setupRecyclerView()
+        observeViewModel()
+    }
+
+    private fun setupRecyclerView() {
+        adapter = FavoriteAdapter(
+            onItemClick = { recipe ->
+                findNavController().navigate(
+                    R.id.action_favorite_to_recipeDetail,
+                    Bundle().apply { putString("idMeal", recipe.idMeal) }
+                )
+            },
+            onDeleteClick = { recipe -> viewModel.removeFavorite(recipe) }
+        )
+        binding.rvFavorites.layoutManager = LinearLayoutManager(requireContext())
+        binding.rvFavorites.adapter = adapter
+
+        ItemTouchHelper(object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
+            override fun onMove(rv: RecyclerView, vh: RecyclerView.ViewHolder,
+                                t: RecyclerView.ViewHolder) = false
+            override fun onSwiped(vh: RecyclerView.ViewHolder, dir: Int) {
+                adapter.currentList.getOrNull(vh.bindingAdapterPosition)
+                    ?.let { viewModel.removeFavorite(it) }
+            }
+        }).attachToRecyclerView(binding.rvFavorites)
+    }
+
+    private fun observeViewModel() {
+        viewModel.favorites.observe(viewLifecycleOwner) { list ->
+            adapter.submitList(list)
+            val empty = list.isNullOrEmpty()
+            binding.tvEmptyState.visibility = if (empty) View.VISIBLE else View.GONE
+            binding.rvFavorites.visibility  = if (empty) View.GONE  else View.VISIBLE
+        }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 }
