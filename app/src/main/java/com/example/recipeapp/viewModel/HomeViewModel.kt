@@ -1,12 +1,12 @@
-package com.example.recipeapp.Model.HomeViewModel
+package com.example.recipeapp.viewModel
+
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.recipeapp.Model.ApiService
-import com.example.recipeapp.Model.Repository.RecipeRepository
-import com.example.recipeapp.Model.RetrofitInstance
-import com.example.recipeapp.Recipe.Recipe
+import com.example.recipeapp.database.model.Recipe
+import com.example.recipeapp.database.remote.RetrofitInstance
+import com.example.recipeapp.database.repository.RecipeRepository
 import kotlinx.coroutines.launch
 
 //view model preper data for ui

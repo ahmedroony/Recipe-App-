@@ -81,4 +81,11 @@ dependencies {
     // Retrofit
     implementation(libs.retrofit)
     implementation(libs.retrofit.converter.gson)
+    // okHTTP
+
+    implementation("com.squareup.okhttp3:okhttp:5.5.0")
+
+    implementation("com.squareup.okhttp3:logging-interceptor:5.5.0")
+
+
 }

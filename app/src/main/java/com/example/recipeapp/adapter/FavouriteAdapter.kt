@@ -1,18 +1,19 @@
 package com.example.recipeapp.adapter
 
+import android.R
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.recipeapp.database.model.Recipe
 import com.example.recipeapp.databinding.ItemFavoriteBinding
-import com.example.recipeapp.Model.Recipe
 
-class FavoriteAdapter(
+class FavouriteAdapter(
     private val onItemClick: (Recipe) -> Unit,
     private val onDeleteClick: (Recipe) -> Unit
-) : ListAdapter<Recipe, FavoriteAdapter.ViewHolder>(DIFF) {
+) : ListAdapter<Recipe, FavouriteAdapter.ViewHolder>(DIFF) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
         ViewHolder(ItemFavoriteBinding.inflate(LayoutInflater.from(parent.context), parent, false))
@@ -26,7 +27,7 @@ class FavoriteAdapter(
             b.tvRecipeName.text = recipe.strMeal
             Glide.with(b.root.context)
                 .load(recipe.strMealThumb)
-                .placeholder(android.R.color.darker_gray)
+                .placeholder(R.color.darker_gray)
                 .centerCrop()
                 .into(b.ivRecipeThumbnail)
             b.root.setOnClickListener { onItemClick(recipe) }

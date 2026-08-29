@@ -10,12 +10,11 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.example.recipeapp.R
 import com.example.recipeapp.databinding.FragmentRecipeDetailBinding
 import com.example.recipeapp.util.VideoOverlayManager
-import com.example.recipeapp.viewmodel.RecipeDetailViewModel
+import com.example.recipeapp.viewModel.RecipeDetailViewModel
 
 class RecipeDetailFragment : Fragment() {
 

@@ -11,16 +11,16 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.recipeapp.R
-import com.example.recipeapp.adapter.FavoriteAdapter
+import com.example.recipeapp.adapter.FavouriteAdapter
 import com.example.recipeapp.databinding.FragmentFavoriteBinding
-import com.example.recipeapp.viewmodel.FavoriteViewModel
+import com.example.recipeapp.viewModel.FavoriteViewModel
 
-class FavoriteFragment : Fragment() {
+class FavouriteFragment : Fragment() {
 
     private var _binding: FragmentFavoriteBinding? = null
     private val binding get() = _binding!!
     private val viewModel: FavoriteViewModel by viewModels()
-    private lateinit var adapter: FavoriteAdapter
+    private lateinit var adapter: FavouriteAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -37,7 +37,7 @@ class FavoriteFragment : Fragment() {
     }
 
     private fun setupRecyclerView() {
-        adapter = FavoriteAdapter(
+        adapter = FavouriteAdapter(
             onItemClick = { recipe ->
                 findNavController().navigate(
                     R.id.action_favorite_to_recipeDetail,

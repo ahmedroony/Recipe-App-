@@ -1,11 +1,11 @@
-package com.example.recipeapp.viewmodel
+package com.example.recipeapp.viewModel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.recipeapp.Model.Recipe
-import com.example.recipeapp.Model.Repository.RecipeRepository
+import com.example.recipeapp.database.model.Recipe
+import com.example.recipeapp.database.repository.RecipeRepository
 import kotlinx.coroutines.launch
 
 class RecipeDetailViewModel : ViewModel() {

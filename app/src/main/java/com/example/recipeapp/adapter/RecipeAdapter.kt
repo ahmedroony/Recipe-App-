@@ -1,4 +1,4 @@
-package com.example.recipeapp.Recipe.RecipeAdapter
+package com.example.recipeapp.adapter
 
 import android.view.LayoutInflater
 import android.view.View
@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.recipeapp.R
-import com.example.recipeapp.Recipe.Recipe
+import com.example.recipeapp.database.model.Recipe
 
 class RecipeAdapter(
     private var recipeList: List<Recipe>
@@ -18,13 +18,13 @@ class RecipeAdapter(
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): RecipeAdapter.RecipeViewHolder {
+    ): RecipeViewHolder {
         // Inflate the item layout for the recipe item
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_recipe, parent, false)
         return RecipeViewHolder(view)
     }
 //link my data to the view
-    override fun onBindViewHolder(holder: RecipeAdapter.RecipeViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: RecipeViewHolder, position: Int) {
         val currentRecipe = recipeList[position]
         holder.tvTitle.text = currentRecipe.strMeal
         holder.itemView.setOnClickListener {

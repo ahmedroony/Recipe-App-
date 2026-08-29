@@ -53,7 +53,7 @@
     <!-- Task 4 owns the following three fragments -->
     <fragment
         android:id="@+id/favoriteFragment"
-        android:name="com.example.recipeapp.Fragments.FavoriteFragment"
+        android:name="com.example.recipeapp.Fragments.FavouriteFragment"
         android:label="@string/favorites"
         tools:layout="@layout/fragment_favorite">
         <action
