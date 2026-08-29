@@ -9,6 +9,10 @@ import kotlinx.coroutines.launch
 class FavoriteViewModel(private val repository: RecipeRepository) : ViewModel() {
     val favorites = repository.getFavorites()
 
+    init {
+        viewModelScope.launch { repository.refreshFavoritesFromDb() }
+    }
+
     fun removeFavorite(recipe: Recipe) {
         viewModelScope.launch { repository.deleteFavorite(recipe) }
     }

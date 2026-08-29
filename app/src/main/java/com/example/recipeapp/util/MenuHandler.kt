@@ -25,8 +25,8 @@ import com.example.recipeapp.R
 object MenuHandler {
 
     // Must match Person 1's SessionManager keys exactly
-    private const val PREFS_NAME = "recipe_app_prefs"
-    private const val KEY_LOGGED_IN = "is_logged_in"
+    private const val prefs = "user_session"
+    private const val key = "IS_LOGGED_IN"
 
     fun inflate(activity: AppCompatActivity, menu: Menu, inflater: MenuInflater): Boolean {
         inflater.inflate(R.menu.menu_options, menu)
@@ -48,8 +48,8 @@ object MenuHandler {
     }
 
     private fun signOut(activity: AppCompatActivity) {
-        activity.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
-            .edit().putBoolean(KEY_LOGGED_IN, false).apply()
+        activity.getSharedPreferences(prefs, Context.MODE_PRIVATE)
+            .edit().putBoolean(key, false).apply()
         // TODO PERSON 2: Replace MainActivity::class.java with AuthActivity::class.java
         val intent = Intent(activity, MainActivity::class.java).apply {
             flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK

@@ -28,7 +28,7 @@ class FavouriteFragment : Fragment() {
     private lateinit var adapter: FavouriteAdapter
 
     // get hold of Database , with the safe passage of the context
-    // using Lazu for sake of eya catching :)
+    // using Lazy for sake of eya catching :)
     private val database by lazy { RecipeDatabase.getDatabase(requireContext()) }
 
     private val repository by lazy {
