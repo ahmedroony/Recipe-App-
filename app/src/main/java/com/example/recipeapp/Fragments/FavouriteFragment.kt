@@ -6,21 +6,44 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.recipeapp.R
 import com.example.recipeapp.adapter.FavouriteAdapter
+import com.example.recipeapp.database.RecipeDatabase
+import com.example.recipeapp.database.remote.RetrofitInstance
+import com.example.recipeapp.database.repository.RecipeRepository
 import com.example.recipeapp.databinding.FragmentFavoriteBinding
+import com.example.recipeapp.util.RecipeViewModelFactory
 import com.example.recipeapp.viewModel.FavoriteViewModel
+import com.example.recipeapp.viewModel.RecipeDetailViewModel
 
 class FavouriteFragment : Fragment() {
 
     private var _binding: FragmentFavoriteBinding? = null
     private val binding get() = _binding!!
-    private val viewModel: FavoriteViewModel by viewModels()
     private lateinit var adapter: FavouriteAdapter
+
+    // get hold of Database , with the safe passage of the context
+    // using Lazu for sake of eya catching :)
+    private val database by lazy { RecipeDatabase.getDatabase(requireContext()) }
+
+    private val repository by lazy {
+        RecipeRepository.getInstance(
+            favoriteDao = database.favouriteDao(),
+            apiService = RetrofitInstance.api
+        )
+    }
+
+    private val factory by lazy { RecipeViewModelFactory(repository) }
+
+    // more standard to kotlin , idiot-proof :D
+    private val viewModel: FavoriteViewModel by lazy {
+        ViewModelProvider(this, factory)[FavoriteViewModel::class.java]
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

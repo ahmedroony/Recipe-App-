@@ -4,14 +4,14 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.recipeapp.database.model.Recipe
+import com.example.recipeapp.database.local.FavouriteDao
+import com.example.recipeapp.database.local.Recipe
+import com.example.recipeapp.database.remote.ApiService
+import com.example.recipeapp.database.remote.RetrofitInstance
 import com.example.recipeapp.database.repository.RecipeRepository
 import kotlinx.coroutines.launch
 
-class RecipeDetailViewModel : ViewModel() {
-
-    private val repository = RecipeRepository.getInstance()
-
+class RecipeDetailViewModel(private val repository: RecipeRepository) : ViewModel() {
     private val _recipe = MutableLiveData<Recipe?>()
     val recipe: LiveData<Recipe?> = _recipe
 

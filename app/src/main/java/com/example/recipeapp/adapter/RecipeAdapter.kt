@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.recipeapp.R
-import com.example.recipeapp.database.model.Recipe
+import com.example.recipeapp.database.local.Recipe
 
 class RecipeAdapter(
     private var recipeList: List<Recipe>

@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.recipeapp.database.model.Recipe
+import com.example.recipeapp.database.local.Recipe
 import com.example.recipeapp.databinding.ItemFavoriteBinding
 
 class FavouriteAdapter(

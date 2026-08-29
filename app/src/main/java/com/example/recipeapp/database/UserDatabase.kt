@@ -1,12 +1,9 @@
 package com.example.recipeapp.database
 
 import android.content.Context
-import androidx.room.Dao
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.example.recipeapp.database.local.FavoriteDao
-import com.example.recipeapp.database.local.FavouriteEntity
 import com.example.recipeapp.database.local.UserDao
 import com.example.recipeapp.database.local.UserEntity
 
