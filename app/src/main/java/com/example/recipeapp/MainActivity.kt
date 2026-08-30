@@ -20,5 +20,10 @@ class MainActivity : AppCompatActivity() {
         val bottomNav = findViewById<BottomNavigationView>(R.id.bottomNavigation)
 
         bottomNav.setupWithNavController(navController)
+
+        // Fix: When clicking the already selected tab (e.g., Home), pop back to its root fragment
+        bottomNav.setOnItemReselectedListener { item ->
+            navController.popBackStack(item.itemId, false)
+        }
     }
 }
