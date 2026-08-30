@@ -13,7 +13,11 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.example.recipeapp.R
+import com.example.recipeapp.database.RecipeDatabase
+import com.example.recipeapp.database.remote.RetrofitInstance
+import com.example.recipeapp.database.repository.RecipeRepository
 import com.example.recipeapp.databinding.FragmentRecipeDetailBinding
+import com.example.recipeapp.util.RecipeViewModelFactory
 import com.example.recipeapp.util.VideoOverlayManager
 import com.example.recipeapp.viewModel.RecipeDetailViewModel
 
@@ -21,7 +25,17 @@ class RecipeDetailFragment : Fragment() {
 
     private var _binding: FragmentRecipeDetailBinding? = null
     private val binding get() = _binding!!
-    private val viewModel: RecipeDetailViewModel by viewModels()
+
+    private val database by lazy { RecipeDatabase.getDatabase(requireContext()) }
+    private val repository by lazy {
+        RecipeRepository.getInstance(
+            favoriteDao = database.favouriteDao(),
+            apiService = RetrofitInstance.api
+        )
+    }
+    private val factory by lazy { RecipeViewModelFactory(repository) }
+
+    private val viewModel: RecipeDetailViewModel by viewModels { factory }
     private var isExpanded = false
 
     override fun onCreateView(
