@@ -37,9 +37,11 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
         rvRecipes.layoutManager = LinearLayoutManager(requireContext())
        val adapter = RecipeAdapter(emptyList()){ selectedRecipe ->
+
            val args = Bundle().apply {
                putString("idMeal", selectedRecipe.idMeal)
            }
+
            findNavController().navigate(R.id.action_home_to_recipeDetail, args)
        }
         rvRecipes.adapter = adapter
