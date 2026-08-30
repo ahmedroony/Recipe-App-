@@ -10,7 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.example.recipeapp.R
 import com.example.recipeapp.database.RecipeDatabase
@@ -25,28 +25,18 @@ class RecipeDetailFragment : Fragment() {
 
     private var _binding: FragmentRecipeDetailBinding? = null
     private val binding get() = _binding!!
-    private var isExpanded = false
 
-    // get hold of Database , with the safe passage of the context
-    // using Lazu for sake of eya catching :)
     private val database by lazy { RecipeDatabase.getDatabase(requireContext()) }
-
     private val repository by lazy {
         RecipeRepository.getInstance(
             favoriteDao = database.favouriteDao(),
             apiService = RetrofitInstance.api
         )
     }
-
     private val factory by lazy { RecipeViewModelFactory(repository) }
 
-    // more standard to kotlin , idiot-proof :D
-    private val viewModel: RecipeDetailViewModel by lazy {
-        ViewModelProvider(this, factory)[RecipeDetailViewModel::class.java]
-    }
-
-    // the actual code
-
+    private val viewModel: RecipeDetailViewModel by viewModels { factory }
+    private var isExpanded = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -80,7 +70,7 @@ class RecipeDetailFragment : Fragment() {
                 .placeholder(android.R.color.darker_gray)
                 .into(binding.ivRecipeImage)
             val preview = recipe.strInstructions.take(200).trimEnd() +
-                if (recipe.strInstructions.length > 200) "…" else ""
+                    if (recipe.strInstructions.length > 200) "…" else ""
             binding.tvInstructionsPreview.text = preview
             binding.tvInstructionsFull.text = recipe.strInstructions
             binding.btnPlayVideo.visibility =
