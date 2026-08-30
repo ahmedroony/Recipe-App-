@@ -21,9 +21,18 @@ private val viewModel: SearchViewModel by viewModels()
         super.onViewCreated(view, savedInstanceState)
         val etSearch = view.findViewById<EditText>(R.id.etSearch)
         val rvSearchResults = view.findViewById<RecyclerView>(R.id.rvSearchResults)
-        val adapter = RecipeAdapter(emptyList())
-        {
-            selectRecipe -> Toast.makeText(context, "Clicked: ${selectRecipe.strMeal}", Toast.LENGTH_SHORT).show()
+
+        val adapter = RecipeAdapter(emptyList()) { selectedRecipe ->
+            val detailFragment = RecipeDetailFragment()
+
+            val args = Bundle()
+            args.putString("idMeal", selectedRecipe.idMeal)
+            detailFragment.arguments = args
+
+            parentFragmentManager.beginTransaction()
+                .replace(R.id.fragment_container, detailFragment)
+                .addToBackStack(null)
+                .commit()
         }
 
         rvSearchResults.layoutManager = LinearLayoutManager(requireContext())

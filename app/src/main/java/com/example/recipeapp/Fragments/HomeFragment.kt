@@ -16,19 +16,26 @@ import com.example.recipeapp.Recipe.RecipeAdapter.RecipeAdapter
 
 class HomeFragment : Fragment(R.layout.fragment_home) {
     private val viewModel: HomeViewModel by viewModels()
-    private val adapter = RecipeAdapter(emptyList()){ item->
-            Toast.makeText(context,"Clicked:${item.strMeal}",
-            Toast.LENGTH_SHORT).show()
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         val rvRecipes = view.findViewById<RecyclerView>(R.id.rvRecipes)
+
         rvRecipes.layoutManager = LinearLayoutManager(requireContext())
+       val adapter = RecipeAdapter(emptyList()){ selectedRecipe
+           -> val detailFragment = RecipeDetailFragment()
+           val args = Bundle()
+           args.putString("idMeal",selectedRecipe.idMeal)
+           detailFragment.arguments = args
+           parentFragmentManager.beginTransaction()
+               .replace(R.id.fragment_container,detailFragment)
+               .addToBackStack(null).commit()
+       }
         rvRecipes.adapter = adapter
-        viewModel.recipes.observe(viewLifecycleOwner){
-            item -> adapter.updateData(item)
+        viewModel.recipes.observe(viewLifecycleOwner) { items ->
+            adapter.updateData(items)
         }
         viewModel.fetchRecipes("c")
     }
-}
+    }
