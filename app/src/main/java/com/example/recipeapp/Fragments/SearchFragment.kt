@@ -13,11 +13,24 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.recipeapp.R
-import com.example.recipeapp.Recipe.RecipeAdapter.RecipeAdapter
-import com.example.recipeapp.Model.SearchViewModel.SearchViewModel
+import com.example.recipeapp.adapter.RecipeAdapter
+import com.example.recipeapp.database.RecipeDatabase
+import com.example.recipeapp.database.remote.RetrofitInstance
+import com.example.recipeapp.database.repository.RecipeRepository
+import com.example.recipeapp.util.RecipeViewModelFactory
+import com.example.recipeapp.viewModel.SearchViewModel
 
 class SearchFragment : Fragment(R.layout.fragment_search) {
-private val viewModel: SearchViewModel by viewModels()
+    private val database by lazy { RecipeDatabase.getDatabase(requireContext()) }
+    private val repository by lazy {
+        RecipeRepository.getInstance(
+            favoriteDao = database.favouriteDao(),
+            apiService = RetrofitInstance.api
+        )
+    }
+    private val factory by lazy { RecipeViewModelFactory(repository) }
+    private val viewModel: SearchViewModel by viewModels { factory }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val etSearch = view.findViewById<EditText>(R.id.etSearch)

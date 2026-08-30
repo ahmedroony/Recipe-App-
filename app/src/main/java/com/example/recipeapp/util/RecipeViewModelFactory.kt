@@ -6,6 +6,7 @@ import com.example.recipeapp.database.repository.RecipeRepository
 import com.example.recipeapp.viewModel.FavoriteViewModel
 import com.example.recipeapp.viewModel.HomeViewModel
 import com.example.recipeapp.viewModel.RecipeDetailViewModel
+import com.example.recipeapp.viewModel.SearchViewModel
 
 class RecipeViewModelFactory(private val repository: RecipeRepository) : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
@@ -23,6 +24,10 @@ class RecipeViewModelFactory(private val repository: RecipeRepository) : ViewMod
             modelClass.isAssignableFrom(FavoriteViewModel::class.java) -> {
                 @Suppress("UNCHECKED_CAST")
                 FavoriteViewModel(repository) as T
+            }
+            modelClass.isAssignableFrom(SearchViewModel::class.java) -> {
+                @Suppress("UNCHECKED_CAST")
+                SearchViewModel(repository) as T
             }
             else -> throw IllegalArgumentException("Unknown ViewModel class: ${modelClass.name}")
         }

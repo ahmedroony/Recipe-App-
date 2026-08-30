@@ -10,13 +10,25 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.recipeapp.Model.HomeViewModel.HomeViewModel
 import com.example.recipeapp.R
-import com.example.recipeapp.Recipe.RecipeAdapter.RecipeAdapter
+import com.example.recipeapp.adapter.RecipeAdapter
+import com.example.recipeapp.database.RecipeDatabase
+import com.example.recipeapp.database.remote.RetrofitInstance
+import com.example.recipeapp.database.repository.RecipeRepository
+import com.example.recipeapp.util.RecipeViewModelFactory
+import com.example.recipeapp.viewModel.HomeViewModel
 
 
 class HomeFragment : Fragment(R.layout.fragment_home) {
-    private val viewModel: HomeViewModel by viewModels()
+    private val database by lazy { RecipeDatabase.getDatabase(requireContext()) }
+    private val repository by lazy {
+        RecipeRepository.getInstance(
+            favoriteDao = database.favouriteDao(),
+            apiService = RetrofitInstance.api
+        )
+    }
+    private val factory by lazy { RecipeViewModelFactory(repository) }
+    private val viewModel: HomeViewModel by viewModels { factory }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -36,4 +48,4 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         }
         viewModel.fetchRecipes("c")
     }
-    }
+}
