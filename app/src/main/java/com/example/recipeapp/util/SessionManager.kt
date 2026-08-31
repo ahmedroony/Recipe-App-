@@ -1,40 +1,38 @@
-package com.example.recipeapp.database.local
+package com.example.recipeapp.util
 
 import android.content.Context
 import android.content.SharedPreferences
-import androidx.core.content.edit
 
 class SessionManager(context: Context) {
+    private val prefs: SharedPreferences = context.getSharedPreferences("user_session", Context.MODE_PRIVATE)
 
-    // the Shared preference that will be used to determine the login across activities
-    private val prefs: SharedPreferences = context.getSharedPreferences(
-        "user_session"
-        , Context.MODE_PRIVATE)
-
-    // the Auth Person will use this to save the logic session
-    fun saveLoginSession(email: String, isLoggedIn: Boolean) {
-        prefs.edit().apply {
-            putString("USER_EMAIL", email)
-            putBoolean("IS_LOGGED_IN", isLoggedIn)
-            apply() // works at background
-        }
+    fun registerUser(email: String, pass: String) {
+        val editor = prefs.edit()
+        editor.putString("REGISTERED_EMAIL", email)
+        editor.putString("REGISTERED_PASS", pass)
+        editor.apply()
     }
 
+    fun isValidUser(email: String, pass: String): Boolean {
+        val savedEmail = prefs.getString("REGISTERED_EMAIL", "")
+        val savedPass = prefs.getString("REGISTERED_PASS", "")
+        return email == savedEmail && pass == savedPass && email.isNotEmpty()
+    }
+
+    fun saveSession(email: String) {
+        val editor = prefs.edit()
+        editor.putString("USER_EMAIL", email)
+        editor.putBoolean("IS_LOGGED_IN", true)
+        editor.apply()
+    }
 
     fun isLoggedIn(): Boolean {
         return prefs.getBoolean("IS_LOGGED_IN", false)
     }
 
-
-    fun getUserEmail(): String? {
-        return prefs.getString("USER_EMAIL", null)
-    }
-
-    // one for logout
     fun logout() {
-        prefs.edit {
-            clear()
-            apply()
-        }
+        val editor = prefs.edit()
+        editor.clear()
+        editor.apply()
     }
 }

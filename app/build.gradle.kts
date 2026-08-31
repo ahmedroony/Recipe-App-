@@ -40,14 +40,14 @@ dependencies {
     // ── Existing team dependencies (unchanged) ────────────────────────────
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.activity.compose)
+    implementation(libs.androidx.activity.ktx)
+    implementation(libs.androidx.appcompat)
     implementation(libs.androidx.compose.material3)
     implementation(libs.androidx.compose.ui)
     implementation(libs.androidx.compose.ui.graphics)
     implementation(libs.androidx.compose.ui.tooling.preview)
     implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.fragment)
     implementation(libs.androidx.lifecycle.runtime.ktx)
-    implementation(libs.material)
     implementation(libs.recyclerview)
     testImplementation(libs.junit)
     androidTestImplementation(platform(libs.androidx.compose.bom))
@@ -83,11 +83,12 @@ dependencies {
     // Retrofit
     implementation(libs.retrofit)
     implementation(libs.retrofit.converter.gson)
-    // okHTTP
+//   Task 2 additions
+    // Lottie Animation Library
+    implementation("com.airbnb.android:lottie:6.6.1")
 
-    implementation("com.squareup.okhttp3:okhttp:5.5.0")
-
-    implementation("com.squareup.okhttp3:logging-interceptor:5.5.0")
-
-
+// Navigation Component
+    val nav_version = "2.7.7"
+    implementation("androidx.navigation:navigation-fragment-ktx:$nav_version")
+    implementation("androidx.navigation:navigation-ui-ktx:$nav_version")
 }
