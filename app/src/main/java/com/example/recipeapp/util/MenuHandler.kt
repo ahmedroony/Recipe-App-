@@ -7,6 +7,7 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
+import com.example.recipeapp.AuthActivity
 import com.example.recipeapp.MainActivity
 import com.example.recipeapp.R
 
@@ -51,7 +52,7 @@ object MenuHandler {
         activity.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
             .edit().putBoolean(KEY_LOGGED_IN, false).apply()
         // TODO PERSON 2: Replace MainActivity::class.java with AuthActivity::class.java
-        val intent = Intent(activity, MainActivity::class.java).apply {
+        val intent = Intent(activity, AuthActivity::class.java).apply {
             flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         }
         activity.startActivity(intent)

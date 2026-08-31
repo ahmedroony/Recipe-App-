@@ -1,16 +1,40 @@
 package com.example.recipeapp.Fragments
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
+import android.widget.Button
+import android.widget.EditText
+import android.widget.Toast
+import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.example.recipeapp.R
-class RegisterFragment : Fragment() {
+import com.example.recipeapp.util.SessionManager
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_register, container, false)
+class RegisterFragment : Fragment(R.layout.fragment_register) {
+
+    private lateinit var sessionManager: SessionManager
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        sessionManager = SessionManager(requireContext())
+
+        val etEmail = view.findViewById<EditText>(R.id.etEmail)
+        val etPassword = view.findViewById<EditText>(R.id.etPassword)
+        val btnRegister = view.findViewById<Button>(R.id.btnRegister)
+
+        btnRegister?.setOnClickListener {
+            val email = etEmail?.text?.toString()?.trim() ?: ""
+            val password = etPassword?.text?.toString()?.trim() ?: ""
+
+            if (email.isNotEmpty() && password.isNotEmpty()) {
+                sessionManager.registerUser(email, password)
+                Toast.makeText(requireContext(), "Account Created! Please Login", Toast.LENGTH_SHORT).show()
+
+                findNavController().navigateUp()
+            } else {
+                Toast.makeText(requireContext(), "Please fill all fields", Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 }
