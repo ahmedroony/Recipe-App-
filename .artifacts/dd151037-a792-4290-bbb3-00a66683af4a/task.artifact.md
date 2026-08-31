@@ -1,3 +1,3 @@
-- `[x]` Add Retrofit and Gson converter to `libs.versions.toml`
-- `[x]` Add dependencies to `app/build.gradle.kts`
-- `[x]` Verify build by running `./gradlew :app:compileDebugKotlin`
+- `[x]` Implement Side-by-Side layout in `layout-land/fragment_recipe_detail.xml`
+- `[x]` Verify image scaling and button placement
+- `[/]` Test the "Play Video" overlay behavior in landscape

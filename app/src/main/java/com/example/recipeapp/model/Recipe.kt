@@ -1,4 +1,4 @@
-package com.example.recipeapp.Model
+package com.example.recipeapp.model
 
 
 data class Recipe(

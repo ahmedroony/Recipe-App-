@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.recipeapp.databinding.ItemFavoriteBinding
-import com.example.recipeapp.Model.Recipe
+import com.example.recipeapp.model.Recipe
 
 class FavoriteAdapter(
     private val onItemClick: (Recipe) -> Unit,

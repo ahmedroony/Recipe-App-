@@ -2,7 +2,7 @@ package com.example.recipeapp.database
 
 import androidx.lifecycle.LiveData
 import androidx.room.Dao
-import com.example.recipeapp.Model.Recipe
+import com.example.recipeapp.model.Recipe
 
 @Dao
 interface FavoriteDao {
