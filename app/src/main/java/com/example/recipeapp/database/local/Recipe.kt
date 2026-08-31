@@ -1,15 +1,17 @@
 package com.example.recipeapp.database.local
 
 import androidx.room.Entity
-import androidx.room.PrimaryKey
 
-// this chaange was made to save hpurs of writing new mappers to the old task4 codes!
-@Entity(tableName = "favourite_table")
+@Entity(
+    tableName = "favourite_table",
+    primaryKeys = ["userEmail", "idMeal"]
+)
 data class Recipe(
-    @PrimaryKey val idMeal: String,
+    val idMeal: String,
     val strMeal: String,
     val strMealThumb: String,
     val strInstructions: String,
     val strYoutube: String?,
-    var isFavorite: Boolean = false
+    var isFavorite: Boolean = false,
+    val userEmail: String = ""
 )

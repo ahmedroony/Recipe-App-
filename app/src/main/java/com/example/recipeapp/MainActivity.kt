@@ -1,6 +1,7 @@
 package com.example.recipeapp
 
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
@@ -20,6 +21,20 @@ class MainActivity : AppCompatActivity() {
         val bottomNav = findViewById<BottomNavigationView>(R.id.bottomNavigation)
 
         bottomNav.setupWithNavController(navController)
+
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            when (destination.id) {
+                R.id.splashFragment,
+                R.id.loginFragment,
+                R.id.registerFragment,
+                R.id.recipeDetailFragment -> {
+                    bottomNav.visibility = View.GONE
+                }
+                else -> {
+                    bottomNav.visibility = View.VISIBLE
+                }
+            }
+        }
 
         // Fix: When clicking the already selected tab (e.g., Home), pop back to its root fragment
         bottomNav.setOnItemReselectedListener { item ->
