@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
@@ -22,6 +23,7 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
         val etEmail = view.findViewById<EditText>(R.id.etEmail)
         val etPassword = view.findViewById<EditText>(R.id.etPassword)
         val btnRegister = view.findViewById<Button>(R.id.btnRegister)
+        val tvLogin = view.findViewById<TextView>(R.id.tvLogin)
 
         btnRegister?.setOnClickListener {
             val email = etEmail?.text?.toString()?.trim() ?: ""
@@ -35,6 +37,10 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
             } else {
                 Toast.makeText(requireContext(), "Please fill all fields", Toast.LENGTH_SHORT).show()
             }
+        }
+
+        tvLogin?.setOnClickListener {
+            findNavController().navigateUp()
         }
     }
 }

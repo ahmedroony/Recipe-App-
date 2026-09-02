@@ -19,7 +19,6 @@ import com.example.recipeapp.database.repository.RecipeRepository
 import com.example.recipeapp.databinding.FragmentFavoriteBinding
 import com.example.recipeapp.util.RecipeViewModelFactory
 import com.example.recipeapp.viewModel.FavoriteViewModel
-import com.example.recipeapp.viewModel.RecipeDetailViewModel
 
 class FavouriteFragment : Fragment() {
 
