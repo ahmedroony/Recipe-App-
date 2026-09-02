@@ -86,7 +86,7 @@ dependencies {
 //   Task 2 additions
     // Lottie Animation Library
     implementation("com.airbnb.android:lottie:6.6.1")
-
+    implementation("com.squareup.okhttp3:logging-interceptor:4.11.0")
 // Navigation Component
     val nav_version = "2.7.7"
     implementation("androidx.navigation:navigation-fragment-ktx:$nav_version")

@@ -3,55 +3,56 @@ package com.example.recipeapp.Fragments
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
-import com.airbnb.lottie.LottieAnimationView
 import com.example.recipeapp.R
+import com.example.recipeapp.databinding.FragmentSplashBinding
 import com.example.recipeapp.util.SessionManager
 
-class SplashFragment : Fragment(R.layout.fragment_splash) {
+class SplashFragment : Fragment() {
 
-    private lateinit var sessionManager: SessionManager
+    private var _binding: FragmentSplashBinding? = null
+    private val binding get() = _binding!!
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        _binding = FragmentSplashBinding.inflate(inflater, container, false)
+        return binding.root
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        sessionManager = SessionManager(requireContext())
-
-        val lottieAnimation = view.findViewById<LottieAnimationView>(R.id.lottieAnimationView)
-        lottieAnimation?.playAnimation()
+        binding.lottieSplash.playAnimation()
 
         Handler(Looper.getMainLooper()).postDelayed({
             if (isAdded) {
-                if (sessionManager.isLoggedIn()) {
-                    val navOptions = NavOptions.Builder()
-                        .setPopUpTo(R.id.splashFragment, true)
-                        .build()
+                val navOptions = NavOptions.Builder()
+                    .setPopUpTo(R.id.splashFragment, true)
+                    .build()
 
-                    try {
-                        findNavController().navigate(R.id.action_splashFragment_to_homeFragment, null, navOptions)
-                    } catch (e: Exception) {
-                        findNavController().navigate(R.id.homeFragment)
+                try {
+                    val sessionManager = SessionManager(requireContext())
+                    if (sessionManager.isLoggedIn()) {
+                        findNavController().navigate(R.id.homeFragment, args = null, navOptions)
+                    } else {
+                        findNavController().navigate(R.id.loginFragment, args = null, navOptions)
                     }
-                } else {
-                    val navOptions = NavOptions.Builder()
-                        .setPopUpTo(R.id.splashFragment, true)
-                        .build()
-
-                    try {
-                        findNavController().navigate(R.id.action_splashFragment_to_loginFragment, null, navOptions)
-                    } catch (e: Exception) {
-                        findNavController().navigate(R.id.loginFragment)
-                    }
+                }catch (e: Exception){
+                    e.printStackTrace()
                 }
             }
         }, 3000)
     }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 }
-
-
-
-
-
